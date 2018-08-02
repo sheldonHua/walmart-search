@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
+import ProductList from './components/ProductList'
 
 const key = `${process.env.REACT_APP_WALMART_APIKEY}`
 
 class App extends Component {
   state = {
-    searchProduct: ''
+    searchProduct: '',
+    payload: {}
   }
 
   fetchData = (search) => {
@@ -14,6 +16,9 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        this.setState({
+          payload: data 
+        })
       })
   }
 
@@ -32,6 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
+        <ProductList items={this.state.payload.items} />
       </div>
     );
   }
