@@ -8,11 +8,12 @@ const key = `${process.env.REACT_APP_WALMART_APIKEY}`
 class App extends Component {
   state = {
     searchProduct: '',
-    payload: {}
+    payload: {},
+    start: 1
   }
 
   fetchData = (search) => {
-    fetch(`https://api.walmartlabs.com/v1/search?apiKey=${key}&query=${search}`)
+    fetch(`https://api.walmartlabs.com/v1/search?apiKey=${key}&query=${search}&start=${this.state.start}`)
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -37,7 +38,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        <ProductList items={this.state.payload.items} />
+        <div className="wrapper">
+          <ProductList items={this.state.payload.items} />
+        </div>
       </div>
     );
   }
