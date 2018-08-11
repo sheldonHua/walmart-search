@@ -25,7 +25,7 @@ class ProductList extends Component {
     
   }
 
-  paginationBack = () => {
+  paginationPrevious = () => {
     let start = this.state.start
     this.setState({
       start: this.state.start - 12
@@ -44,8 +44,10 @@ class ProductList extends Component {
           {this.props.items && this.props.items.map(this.createList)}
         </ul>
 
-        {(this.props.items && this.state.start > 12) && <button onClick={this.paginationBack}>Back</button>}
-        {this.props.items && <button onClick={this.paginationNext}>Next</button>}
+        <div className="pagination">
+          {this.props.items && <button className="pagination-button" disabled={this.state.start <= 12 ? true : false} onClick={this.paginationPrevious}>Previous</button>}
+          {this.props.items && <button className="pagination-button" onClick={this.paginationNext}>Next</button>}
+        </div>
       </div>
     )
   }

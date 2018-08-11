@@ -52,6 +52,10 @@
   border: none;
 }
 
+.product-list {
+  padding-bottom: 5rem;
+}
+
 .product-list ul {
   display: flex;  
   padding: 0;
@@ -76,6 +80,17 @@
 .product-list h1 {
   text-align: left;
   color: #1A6EC1;
+}
+
+.pagination {
+  margin: 0 auto;
+  text-align:center;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  font-size:1.5rem;
+  margin: 0 10px;
 }
 
 
