@@ -9,7 +9,8 @@ class App extends Component {
   state = {
     searchProduct: '',
     payload: {},
-    start: 12
+    start: 12,
+    wasSearch: false
   }
 
   fetchData = (search, start) => {
@@ -18,7 +19,19 @@ class App extends Component {
       .then(data => {
         console.log(data)
         this.setState({
-          payload: data 
+          payload: data,
+          wasSearch: true
+        })
+      })
+  }
+
+  fetchTrend = () => {
+    fetch(`http://api.walmartlabs.com/v1/trends?apiKey=${key}&numItems=6`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          payload: data
         })
       })
   }
@@ -34,6 +47,10 @@ class App extends Component {
     this.fetchData(this.state.searchProduct, this.state.start)
   }
 
+  componentDidMount() {
+    this.fetchTrend()
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,6 +61,7 @@ class App extends Component {
             fetchData={this.fetchData} 
             searchProduct={this.state.searchProduct}
             start={this.state.start}
+            wasSearch={this.state.wasSearch}
           />
         </div>
       </div>

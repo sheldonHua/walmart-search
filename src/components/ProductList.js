@@ -20,9 +20,7 @@ class ProductList extends Component {
       start: start + 12
     }, () => {
       this.props.fetchData(this.props.searchProduct, this.state.start)
-    })
-
-    
+    }) 
   }
 
   paginationPrevious = () => {
@@ -32,8 +30,6 @@ class ProductList extends Component {
     }, () => {
       this.props.fetchData(this.props.searchProduct, this.state.start)
     })
-
-    
   }
 
   render() {
@@ -44,10 +40,14 @@ class ProductList extends Component {
           {this.props.items && this.props.items.map(this.createList)}
         </ul>
 
-        <div className="pagination">
-          {this.props.items && <button className="pagination-button" disabled={this.state.start <= 12 ? true : false} onClick={this.paginationPrevious}>Previous</button>}
-          {this.props.items && <button className="pagination-button" onClick={this.paginationNext}>Next</button>}
-        </div>
+        {
+          this.props.wasSearch &&
+          <div className="pagination">
+            {this.props.items && <button className="pagination-button" disabled={this.state.start <= 12 ? true : false} onClick={this.paginationPrevious}>Previous</button>}
+            {this.props.items && <button className="pagination-button" onClick={this.paginationNext}>Next</button>}
+          </div>
+        }
+        
       </div>
     )
   }
