@@ -9,11 +9,11 @@ class App extends Component {
   state = {
     searchProduct: '',
     payload: {},
-    start: 1
+    start: 12
   }
 
-  fetchData = (search) => {
-    fetch(`https://api.walmartlabs.com/v1/search?apiKey=${key}&query=${search}&start=${this.state.start}`)
+  fetchData = (search, start) => {
+    fetch(`https://api.walmartlabs.com/v1/search?apiKey=${key}&numItems=12&start=${start}&query=${search}&start=${this.state.start}`)
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -31,7 +31,7 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.fetchData(this.state.searchProduct)
+    this.fetchData(this.state.searchProduct, this.state.start)
   }
 
   render() {
@@ -39,7 +39,12 @@ class App extends Component {
       <div className="App">
         <Header handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
         <div className="wrapper">
-          <ProductList items={this.state.payload.items} />
+          <ProductList 
+            items={this.state.payload.items} 
+            fetchData={this.fetchData} 
+            searchProduct={this.state.searchProduct}
+            start={this.state.start}
+          />
         </div>
       </div>
     );
