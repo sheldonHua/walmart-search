@@ -18,6 +18,9 @@
   margin-right: 3rem;
   font-size: 2.8rem;
 }
+body {
+  background: #eee;
+}
 
 .wrapper {
   margin: 0 auto;
@@ -64,12 +67,13 @@
 }
 
 .product-list li {
-  border: 1px solid #eee;
+  border: 1px solid #e9e9e9;
   list-style: none;
   text-align: center;
   width: 385px;
   padding: 20px;
-  margin: 20px 0;
+  margin: 10px 0;
+  background: white;
 }
 
 .product-list h2 {
@@ -80,6 +84,7 @@
 .product-list h1 {
   text-align: left;
   color: #1A6EC1;
+  margin-bottom: 0;
 }
 
 .pagination {

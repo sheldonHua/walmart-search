@@ -17,7 +17,7 @@ class ProductList extends Component {
   paginationNext = () => {
     let start = this.state.start
     this.setState({
-      start: start + 12
+      start: start + this.props.start
     }, () => {
       this.props.fetchData(this.props.searchProduct, this.state.start)
     }) 
@@ -26,7 +26,7 @@ class ProductList extends Component {
   paginationPrevious = () => {
     let start = this.state.start
     this.setState({
-      start: this.state.start - 12
+      start: this.state.start - this.props.start
     }, () => {
       this.props.fetchData(this.props.searchProduct, this.state.start)
     })
@@ -43,11 +43,11 @@ class ProductList extends Component {
         {
           this.props.wasSearch &&
           <div className="pagination">
-            {this.props.items && <button className="pagination-button" disabled={this.state.start <= 12 ? true : false} onClick={this.paginationPrevious}>Previous</button>}
+            {this.props.items && <button className="pagination-button" disabled={this.state.start <= this.props.start ? true : false} onClick={this.paginationPrevious}>Previous</button>}
             {this.props.items && <button className="pagination-button" onClick={this.paginationNext}>Next</button>}
           </div>
         }
-        
+
       </div>
     )
   }
