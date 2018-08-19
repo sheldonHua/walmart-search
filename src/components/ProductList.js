@@ -43,8 +43,21 @@ class ProductList extends Component {
         {
           this.props.wasSearch &&
           <div className="pagination">
-            {this.props.items && <button className="pagination-button" disabled={this.state.start <= this.props.start ? true : false} onClick={this.paginationPrevious}>Previous</button>}
-            {this.props.items && <button className="pagination-button" onClick={this.paginationNext}>Next</button>}
+            {
+              this.props.items && 
+                <button 
+                  className="pagination-button" 
+                  disabled={this.state.start <= this.props.start ? true : false} 
+                  onClick={this.paginationPrevious}>Previous
+                </button>
+              }
+            {
+              this.props.items && 
+                <button 
+                  className="pagination-button" 
+                  onClick={this.paginationNext}>Next
+                </button>
+            }
           </div>
         }
 
