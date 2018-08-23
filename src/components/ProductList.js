@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   state = {
@@ -10,6 +11,7 @@ class ProductList extends Component {
               <img src={item.thumbnailImage} />
               <h2 className="product-list-heading">{ item.name }</h2>
               <h1>${item.salePrice}</h1>
+              <Link to='/product'>Read More</Link>
             </li>
            )
   }
