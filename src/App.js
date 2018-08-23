@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Router } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header'
 import ProductList from './components/ProductList'
@@ -49,6 +49,10 @@ class App extends Component {
     this.fetchData(this.state.searchProduct, this.state.start)
   }
 
+  productCode = (e) => {
+
+  }
+
   componentDidMount() {
     this.fetchTrend()
   }
@@ -70,9 +74,7 @@ class App extends Component {
                   wasSearch={this.state.wasSearch}
                 />}
               />
-              <Route path='/product' render={() =>
-                <ProductPage />}
-              />
+              <Route path='/product/:itemId' component={ProductPage} />
             </Switch>
           </BrowserRouter>
           </div>

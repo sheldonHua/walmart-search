@@ -6,12 +6,12 @@ class ProductList extends Component {
     start: this.props.start
   }
 
-  createList = (item, i) => {
-    return (<li key={i}>
+  createList = (item) => {
+    return (<li key={item.parentItemId}>
               <img src={item.thumbnailImage} />
               <h2 className="product-list-heading">{ item.name }</h2>
               <h1>${item.salePrice}</h1>
-              <Link to='/product'>Read More</Link>
+              <Link to={`/product/${item.parentItemId}`}>Read More</Link>
             </li>
            )
   }
