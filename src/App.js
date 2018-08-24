@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header'
@@ -46,11 +47,8 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.fetchData(this.state.searchProduct, this.state.start)
-  }
-
-  productCode = (e) => {
-
+    this.fetchData(this.state.searchProduct, this.state.start)  
+    this.props.history.push('/')  
   }
 
   componentDidMount() {
@@ -59,12 +57,9 @@ class App extends Component {
 
   render() {
     return (
-      
         <div className="App">
           <Header handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
           <div className="wrapper">
-          <BrowserRouter>
-            <Switch>
               <Route exact path='/' render={() =>
                 <ProductList
                   items={this.state.payload.items}
@@ -75,13 +70,10 @@ class App extends Component {
                 />}
               />
               <Route path='/product/:itemId' component={ProductPage} />
-            </Switch>
-          </BrowserRouter>
           </div>
         </div>
-      
     );
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -24,8 +24,10 @@ class ProductPage extends Component {
 
   render() {
     return (
-      <div className="product-list">
-        product page
+      <div className="product-page">
+        <div className="cauousel">
+          <img src={this.state.payload.largeImage} />
+        </div>
       </div>
     )
   }
