@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Carousel } from 'react-responsive-carousel';
 
 const key = `${process.env.REACT_APP_WALMART_APIKEY}`
 
@@ -18,6 +19,14 @@ class ProductPage extends Component {
       })
   }
 
+  imageList = (item, key) => {
+    return (
+      <div key={key}>
+        <img src={item.largeImage} />
+      </div>
+    )
+  }
+
   componentDidMount() {
     this.fetchProduct(this.props.match.params.itemId)
   }
@@ -26,7 +35,9 @@ class ProductPage extends Component {
     return (
       <div className="product-page">
         <div className="cauousel">
-          <img src={this.state.payload.largeImage} />
+          <Carousel>
+            {this.state.payload.imageEntities && this.state.payload.imageEntities.map(this.imageList)}
+          </Carousel>
         </div>
       </div>
     )
