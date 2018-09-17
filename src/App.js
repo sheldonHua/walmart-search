@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { fetchApiData } from './actions/'
 import './App.css';
 import Header from './components/Header'
 import ProductList from './components/ProductList'
@@ -16,16 +19,8 @@ class App extends Component {
     wasSearch: false
   }
 
-  fetchData = (search, start) => {
-    fetch(`https://api.walmartlabs.com/v1/search?apiKey=${key}&numItems=12&start=${start}&query=${search}&start=${this.state.start}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        this.setState({
-          payload: data,
-          wasSearch: true
-        })
-      })
+  fetchData1 = (search, start) => {
+    this.props.fetchData(`https://api.walmartlabs.com/v1/search?apiKey=${key}&numItems=12&start=${start}&query=${search}&start=${this.state.start}`)
   }
 
   fetchTrend = () => {
@@ -47,7 +42,7 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.fetchData(this.state.searchProduct, this.state.start)  
+    this.fetchData1(this.state.searchProduct, this.state.start)  
     this.props.history.push('/')  
   }
 
@@ -62,7 +57,7 @@ class App extends Component {
           <div className="wrapper">
               <Route exact path='/' render={() =>
                 <ProductList
-                  items={this.state.payload.items}
+                  items={this.props.items.items}
                   fetchData={this.fetchData}
                   searchProduct={this.state.searchProduct}
                   start={this.state.start}
@@ -76,4 +71,15 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => ({
+  items: state.items
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchData: (url) => dispatch(fetchApiData(url))
+})
+
+export default compose(  
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter
+)(App)
