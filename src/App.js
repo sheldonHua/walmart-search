@@ -19,19 +19,15 @@ class App extends Component {
     wasSearch: false
   }
 
-  fetchData1 = (search, start) => {
+  fetchSearch = (search, start) => {
     this.props.fetchData(`https://api.walmartlabs.com/v1/search?apiKey=${key}&numItems=12&start=${start}&query=${search}&start=${this.state.start}`)
+    this.setState({
+      wasSearch: true
+    })
   }
 
   fetchTrend = () => {
-    fetch(`http://api.walmartlabs.com/v1/trends?apiKey=${key}&numItems=6`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        this.setState({
-          payload: data
-        })
-      })
+    this.props.fetchData(`http://api.walmartlabs.com/v1/trends?apiKey=${key}&numItems=6`)
   }
 
   handleInput = (e) => {
@@ -42,7 +38,7 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.fetchData1(this.state.searchProduct, this.state.start)  
+    this.fetchSearch(this.state.searchProduct, this.state.start)  
     this.props.history.push('/')  
   }
 
@@ -58,7 +54,7 @@ class App extends Component {
               <Route exact path='/' render={() =>
                 <ProductList
                   items={this.props.items.items}
-                  fetchData={this.fetchData}
+                  fetchSearch={this.fetchSearch}
                   searchProduct={this.state.searchProduct}
                   start={this.state.start}
                   wasSearch={this.state.wasSearch}
@@ -79,7 +75,7 @@ const mapDispatchToProps = dispatch => ({
   fetchData: (url) => dispatch(fetchApiData(url))
 })
 
-export default compose(  
-  connect(mapStateToProps, mapDispatchToProps),
-  withRouter
+export default compose( 
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
 )(App)

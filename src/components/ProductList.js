@@ -21,7 +21,7 @@ class ProductList extends Component {
     this.setState({
       start: start + this.props.start
     }, () => {
-      this.props.fetchData(this.props.searchProduct, this.state.start)
+      this.props.fetchSearch(this.props.searchProduct, this.state.start)
     }) 
   }
 
@@ -30,7 +30,7 @@ class ProductList extends Component {
     this.setState({
       start: this.state.start - this.props.start
     }, () => {
-      this.props.fetchData(this.props.searchProduct, this.state.start)
+      this.props.fetchSearch(this.props.searchProduct, this.state.start)
     })
   }
 
