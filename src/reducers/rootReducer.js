@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import { items } from './simpleReducer'
+import { loader } from './loaderReducer'
+import { items } from './itemReducer'
 
 export default combineReducers({
-  items
+  items,
+  loader
 })

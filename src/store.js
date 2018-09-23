@@ -2,7 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers/rootReducer'
 
-const initialState = {}
+const initialState = {
+  loader: false
+}
 
 const configureStore = () => createStore(
   rootReducer,

@@ -1,3 +1,10 @@
+export function loader(show) {
+  return {
+    type: 'SHOW_LOADER',
+    loader: show
+  }
+}
+
 export function fetchSuccessful(payload) {
   return {
     type: 'FETCH_SUCCESSFUL',
@@ -12,10 +19,14 @@ export function fetchApiData(url) {
         if(!response.ok) {
           throw Error(response.ok)
         }
+        dispatch(loader(true))
         return response
       })
       .then(response => response.json())
-      .then(payload => dispatch(fetchSuccessful(payload)))
+      .then(payload => { 
+        dispatch(loader(false))
+        dispatch(fetchSuccessful(payload))
+      })
       .catch(error => console.log(error))
   }
 }

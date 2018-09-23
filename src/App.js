@@ -49,26 +49,31 @@ class App extends Component {
   render() {
     return (
         <div className="App">
+        
           <Header handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-          <div className="wrapper">
-              <Route exact path='/' render={() =>
-                <ProductList
-                  items={this.props.items.items}
-                  fetchSearch={this.fetchSearch}
-                  searchProduct={this.state.searchProduct}
-                  start={this.state.start}
-                  wasSearch={this.state.wasSearch}
-                />}
-              />
-              <Route path='/product/:itemId' component={ProductPage} />
-          </div>
+            <div className="wrapper">
+                {this.props.loader ? <div class="spinner"></div> : 
+                  <Route exact path='/' render={() =>
+                    <ProductList
+                      items={this.props.items.items}
+                      fetchSearch={this.fetchSearch}
+                      searchProduct={this.state.searchProduct}
+                      start={this.state.start}
+                      wasSearch={this.state.wasSearch}
+                    />}
+                  />
+                }
+                <Route path='/product/:itemId' component={ProductPage} />
+            </div>
+            
         </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  items: state.items
+  items: state.items,
+  loader: state.loader
 })
 
 const mapDispatchToProps = dispatch => ({
